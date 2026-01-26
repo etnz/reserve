@@ -1,0 +1,18 @@
+# Generic APT Repository Configuration
+# This file defines the sources and metadata for the repo.
+
+remote_repos:
+  - owner: "etnz"
+    name: "groom"
+    limit: 5
+
+cache_file: "repo-cache.json"
+
+archive_info:
+  origin: "Le Petit Bijou de Caussade"
+  label: "pbc"
+  suite: "stable"
+  codename: "caussade"
+  architectures: "all amd64 arm64"
+  components: "main"
+  description: "La Reserve du Petit Bijou de Caussade"
