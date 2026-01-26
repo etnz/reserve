@@ -1,0 +1,48 @@
+name: Build and Publish APT Repository
+
+on:
+  workflow_dispatch: # Allows you to run this workflow manually from the Actions tab
+  schedule:
+    - cron: '0 2 * * *' # Runs daily at 2 AM UTC
+  push:
+    branches:
+      - master # The repo branch is called master
+
+jobs:
+  build-and-publish:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write # Required to create/update a release
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Download latest apt-repo-builder
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          # Download from the canonical tool repository, not this one.
+          gh release download --repo etnz/apt-repo-builder --pattern "apt-repo-builder_*_Linux_x86_64.tar.gz"
+          tar -xzf apt-repo-builder_*_Linux_x86_64.tar.gz
+          chmod +x apt-repo-builder
+
+      - name: Generate APT repository files
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: ./apt-repo-builder --out dist --config apt-repo-config.yaml
+
+      - name: Export GPG Public Key
+        env:
+          GPG_PRIVATE_KEY: ${{ secrets.GPG_PRIVATE_KEY }}
+        run: |
+          echo "$GPG_PRIVATE_KEY" | gpg --batch --import
+          gpg --armor --export > dist/pbc.asc
+
+      - name: Publish APT repository to release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          TAG="repo"
+          gh release view "$TAG" || gh release create "$TAG" --title "APT Repository" --notes "This release contains the APT repository files, updated automatically."
+          gh release upload "$TAG" dist/* --clobber
