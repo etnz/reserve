@@ -1,0 +1,38 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup Go
+        uses: actions/setup-go@v6
+        with:
+          go-version: 'stable'
+
+      - name: Restore Repo Cache
+        uses: actions/cache@v5
+        with:
+          path: repo-cache.json
+          key: repo-cache-${{ github.sha }}
+          restore-keys: |
+            repo-cache-
+
+      - name: Build Packages
+        run: make build
+
+      - name: Publish to APT Repo
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          go install github.com/etnz/apt-repo-builder@latest
+          apt-repo-builder push-deb --config apt-repo-config.yaml dist/*.deb
