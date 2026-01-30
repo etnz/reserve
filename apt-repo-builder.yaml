@@ -1,13 +1,15 @@
+# yaml-language-server: $schema=../apt-repo-builder/apt-repo-builder.schema.json
+
 # Generic APT Repository Configuration
 # This file defines the sources and metadata for the repo.
-
-cache_file: "repo-cache.json"
-
-archive_info:
-  origin: "Le Petit Bijou de Caussade"
-  label: "pbc"
-  suite: "stable"
-  codename: "caussade"
-  architectures: "all amd64 arm64"
-  components: "main"
-  description: "La Reserve du Petit Bijou de Caussade"
+project:
+  archive_info:
+    origin: "Le Petit Bijou de Caussade"
+    label: "pbc"
+    suite: "stable"
+    codename: "caussade"
+    architectures: "all amd64 arm64"
+    components: "main"
+    description: "La Reserve du Petit Bijou de Caussade"
+  sources:
+    - "github.com/etnz/reserve"

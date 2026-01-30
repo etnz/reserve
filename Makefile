@@ -7,7 +7,7 @@ TEMPLATES := $(wildcard **.t)
 FLATS := $(patsubst %.t,%,$(TEMPLATES))
 
 
-.PHONY: all build install-tools clean
+.PHONY: all build install-tools clean repo
 
 all: install-tools build
 
@@ -36,7 +36,7 @@ dist/private.key:
 dist/Release: dist/private.key $(DEBS)
 	@echo "Building APT Repository..."
 	@export GPG_PRIVATE_KEY=$$(cat dist/private.key) && \
-	apt-repo-builder index-local --config apt-repo-builder.yaml
+	apt-repo-builder add --src dist/ --config apt-repo-builder.yaml --local-index --cache repo-cache.json 
 
 repo: dist/Release
 

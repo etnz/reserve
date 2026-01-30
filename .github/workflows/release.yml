@@ -3,7 +3,7 @@ name: Release
 on:
   push:
     tags:
-      - 'v*'
+      - 'v*.*.*'
 
 jobs:
   release:
@@ -18,6 +18,11 @@ jobs:
         uses: actions/setup-go@v6
         with:
           go-version: 'stable'
+      
+      - name: Install Tools
+        run: |
+          go install github.com/goreleaser/nfpm/v2/cmd/nfpm@latest
+          go install github.com/etnz/apt-repo-builder@master
 
       - name: Restore Repo Cache
         uses: actions/cache@v5
@@ -28,11 +33,6 @@ jobs:
             repo-cache-
 
       - name: Build Packages
-        run: make build
-
-      - name: Publish to APT Repo
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          go install github.com/etnz/apt-repo-builder@latest
-          apt-repo-builder push-deb --config apt-repo-config.yaml dist/*.deb
+          make build
+          apt-repo-builder add -to github.com/my-org/my-tool/tags/${{ github.ref_name }}
