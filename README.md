@@ -1,4 +1,5 @@
 # La Reserve
 
-This repository is designed to manage a fleet of Debian-based nodes. It uses **nfpm** to build packages and **apt-repo-builder** to host them on GitHub Releases.
+This repository is designed to manage a fleet of Debian-based nodes. It uses  **apt-repo-builder** to generate a debian package archive of 
+the Petit Bijou cluster.
 

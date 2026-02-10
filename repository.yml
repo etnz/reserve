@@ -1,0 +1,35 @@
+# yaml-language-server: $schema=../apt-repo-builder/apt-repo-builder.schema.json
+
+# Petit Bijou de Caussade - Cluster Environment Variables
+
+  # Theme
+  # The Speakeasy	🤫 🎷 🍸 🚬 ✨ 💎
+  # Art Deco Architecture	🏢 📐 🏛️ 🏁 🖤
+  #
+  # INFO  	🛎️	"Service is at your disposal."
+  # ANNOUNCE	🎙️	"Broadcasting live from the Atlantic."
+  # WARN	    ⚡	"High voltage / Caution required."
+  # ERROR	    🚫	"Access strictly prohibited."
+  # SUCCESS	🍸	"Cheers! Operation complete."
+
+
+path: "dist"
+defines:
+  # Name of the house
+  CLUSTER_ID: "petitbijou"
+
+  # Maintainer of the cluster configuration files
+  MAINTAINER: "Le Concierge <petitbijou.caussade@gmail.com>"
+  #
+  # Full human-readable name of the house
+  CLUSTER_NAME: "💎Le Petit Bijou de Caussade💎"
+
+  GROOM_VERSION: "0.0.3"
+  GROOM_RELEASE: "https://github.com/etnz/groom/releases/download/v{{ .GROOM_VERSION }}/pbc-groom-bin_{{ .GROOM_VERSION }}"
+
+# list of packages to build
+packages:
+  - letter-of-introduction.yml # install La Reserve as an APT sources
+  - "{{ .GROOM_RELEASE }}_linux_arm64.deb"
+  - "{{ .GROOM_RELEASE }}_linux_amd64.deb"
+  - groom.yml

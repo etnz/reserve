@@ -1,0 +1,24 @@
+# Defines the Groom Service package
+
+defines:
+  SERVICE: "{{ .CLUSTER_ID }}-groom"
+  USER: "groom"
+meta:
+  Package: "pbc-groom-service"
+  Version: "1.0.1"
+  Architecture: "all"
+  Plateform: "linux"
+  Maintainer: "{{ .MAINTAINER }}"
+  Description: "Groom Service for Le Petit Bijou de Caussade💎"
+  Depends: pbc-groom-bin
+scripts:
+  - src: groom-inst.sh
+    dst: "postinst"
+  - src: groom-rm.sh
+    dst: "prerm"
+  - src: groom-postrm.sh
+    dst: "postrm"
+injects:
+  - src: "groom.service"
+    dst: "/etc/systemd/system/{{ .SERVICE }}.service"
+    conffile: true

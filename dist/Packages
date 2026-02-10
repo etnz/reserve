@@ -1,0 +1,47 @@
+Package: pbc-groom-bin
+Version: 0.0.3
+Architecture: amd64
+Maintainer: Le Concierge <petitbijou.caussade@gmail.com>
+Installed-Size: 3357
+Priority: optional
+Homepage: https://github.com/etnz/groom
+Description: Groom's Binary
+Filename: pbc-groom-bin_0.0.3_amd64.deb
+Size: 1463542
+SHA256: 718ed293fbf651363a6d93dfe9e2cb13d42c2f60ac51d4be90bc70184666282f
+
+Package: pbc-groom-bin
+Version: 0.0.3
+Architecture: arm64
+Maintainer: Le Concierge <petitbijou.caussade@gmail.com>
+Installed-Size: 3265
+Priority: optional
+Homepage: https://github.com/etnz/groom
+Description: Groom's Binary
+Filename: pbc-groom-bin_0.0.3_arm64.deb
+Size: 1345654
+SHA256: 85155616fcec7b7a0110c3e1483a216a269244e3cfbcab2c128a54d9a7684b1d
+
+Package: pbc-groom-service
+Version: 1.0.1
+Architecture: all
+Maintainer: Le Concierge <petitbijou.caussade@gmail.com>
+Installed-Size: 1
+Depends: pbc-groom-bin
+Plateform: linux
+Description: Groom Service for Le Petit Bijou de Caussade💎
+Filename: pbc-groom-service_1.0.1_all.deb
+Size: 1242
+SHA256: 04ffe97836a408c7ecafd5991bea50cd09d877544da32c6aec29e2e7b5ad13f9
+
+Package: pbc-letter-of-introduction
+Version: 1.0.1
+Architecture: all
+Maintainer: Le Concierge <petitbijou.caussade@gmail.com>
+Installed-Size: 2
+Plateform: linux
+Description: Letter of Introduction for Le Petit Bijou de Caussade
+Filename: pbc-letter-of-introduction_1.0.1_all.deb
+Size: 2654
+SHA256: c67bf08a9513943c1a5bc242066baa5c493ac0c51ca7827f612a52a2fd4d2ef0
+

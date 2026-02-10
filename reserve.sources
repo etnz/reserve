@@ -1,0 +1,4 @@
+URIs: {{ .REPOSITORY_URL}}
+Types: deb
+Suites: ./
+Signed-By: {{ .PUBLIC_KEY_PATH}}

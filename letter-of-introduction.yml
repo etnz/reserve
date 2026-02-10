@@ -1,0 +1,22 @@
+# Defines the letter-of-introduction package
+defines:
+  # Github's dist URL
+  REPOSITORY_URL: "https://github.com/etnz/reserve/raw/refs/heads/master/dist/"
+
+  # Path to the local copy of the public GPG key used to verify the APT repository.
+  PUBLIC_KEY_PATH: "/etc/apt/keyrings/reserve.gpg"
+meta:
+  Package: "pbc-letter-of-introduction"
+  Version: "1.0.1"
+  Architecture: "all"
+  Plateform: "linux"
+  Maintainer: "{{ .MAINTAINER }}"
+  Description: "Letter of Introduction for Le Petit Bijou de Caussade"
+injects:
+  - src: "public.gpg" # TODO in theory, the dist folder cannot be referenced
+    dst: "{{ .PUBLIC_KEY_PATH}}"
+    raw: true # do not try templates
+    conffile: true  
+  - src : "reserve.sources"
+    dst: "/etc/apt/sources.list.d/reserve.sources"
+    conffile: true
