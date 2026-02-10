@@ -1,4 +1,4 @@
-# yaml-language-server: $schema=../apt-repo-builder/apt-repo-builder.schema.json
+# yaml-language-server: $schema=https://raw.githubusercontent.com/etnz/apt-repo-builder/master/repository.schema.json
 
 # Petit Bijou de Caussade - Cluster Environment Variables
 

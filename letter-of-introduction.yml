@@ -1,3 +1,5 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/etnz/apt-repo-builder/master/package.schema.json
+
 # Defines the letter-of-introduction package
 defines:
   # Github's dist URL
